@@ -19,7 +19,7 @@ for year in years:
 
     myjson = json.loads(response.text)
 
-    with open(f'../../../resources/bundesliga/bundesliga_{year}.json', 'w', encoding='utf-8') as outfile:
+    with open(f'../../resources/bundesliga/bundesliga_{year}.json', 'w', encoding='utf-8') as outfile:
         json.dump(myjson, outfile, ensure_ascii=False, indent=4)
 
     # only 10 requests per minute allowed
