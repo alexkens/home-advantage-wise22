@@ -11,9 +11,8 @@ for year in years:
     url = f"https://v3.football.api-sports.io/fixtures?league=39&season={year}"
 
     payload = {}
-    # XxXxXxXxXxXxXxXxXxXxXxXx
     headers = {
-        'x-rapidapi-key': 'fd1348bd73ce135ca127ddbe078ca0b8',
+        'x-rapidapi-key': 'XxXxXxXxXxXxXxXxXxXxXxXx',
         'x-rapidapi-host': 'v3.football.api-sports.io'
     }
 
