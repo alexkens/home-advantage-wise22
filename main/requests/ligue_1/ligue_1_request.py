@@ -15,7 +15,7 @@ for year in years:
     headers = {
         # api key hier hin nach push und commit wieder mit x'en
         # fd1348bd73ce135ca127ddbe078ca0b8 XxXxXxXxXxXxXxXxXxXxXxXx
-        'x-rapidapi-key': 'fd1348bd73ce135ca127ddbe078ca0b8',
+        'x-rapidapi-key': 'XxXxXxXxXxXxXxXxXxXxXxXx',
         'x-rapidapi-host': 'v3.football.api-sports.io'
     }
     # https anfragen protokoll handshake etc.
