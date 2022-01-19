@@ -27,3 +27,25 @@ class AnalysisHelper:
     @staticmethod
     def __append(a, b):
         return a.append(b)
+
+
+    def number_of_wins_and_percentages(self, league, year):
+
+        df = self.get_fixtures(league, year)
+        win_series = pd.Series(df['teams.home.winner'])
+        row_size = df.index.size    # number of all fixtures
+
+        home_wins = win_series.value_counts()[True]
+        away_wins = win_series.value_counts()[False]
+        draws = row_size - (home_wins + away_wins)
+
+        print("Number of all Fixtures: ", row_size)
+        print("Home: ", home_wins)
+        print("Away: ", away_wins)
+        print("Draws: ", draws)
+
+        home_win_percentage_with_draws = home_wins / row_size
+        home_win_percentage_without_draws = home_wins / (row_size - draws)
+
+        print("Home Advantage with draws: %.2f %%" % (home_win_percentage_with_draws * 100))
+        print("Home Advantage without draws: %.2f %%" % (home_win_percentage_without_draws * 100))
