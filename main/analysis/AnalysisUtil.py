@@ -6,6 +6,8 @@ import pandas as pd
 
 class AnalysisHelper:
 
+    # TODO Exception Handling
+
     def get_fixtures(self, leagues, years):
         dfs = []
         for league in leagues:
@@ -17,7 +19,6 @@ class AnalysisHelper:
                         df1 = pd.json_normalize(response)
                         df = df.append(df1, ignore_index=True)
                 dfs.append(df)
-            # dfs.append(df)
 
         return ft.reduce(self.__append, dfs).reset_index()
 
@@ -26,39 +27,23 @@ class AnalysisHelper:
         return a.append(b)
 
 
-def number_of_wins_and_percentages(league, year):
+    def number_of_wins_and_percentages(self, league, year):
 
-    analyzer = AnalysisHelper()
-    df = analyzer.get_fixtures(league, year)
+        df = self.get_fixtures(league, year)
+        win_series = pd.Series(df['teams.home.winner'])
+        row_size = df.index.size    # number of all fixtures
 
-    win_series = pd.Series(df['teams.home.winner'])
+        home_wins = win_series.value_counts()[True]
+        away_wins = win_series.value_counts()[False]
+        draws = row_size - (home_wins + away_wins)
 
-    df2 = pd.DataFrame({'home.win': win_series})
-    row_size = df.index.size    # number of all fixtures
+        print("Number of all Fixtures: ", row_size)
+        print("Home: ", home_wins)
+        print("Away: ", away_wins)
+        print("Draws: ", draws)
 
-    home_wins = 0
-    away_wins = 0
-    draws = 0
-    something_else = 0
+        home_win_percentage_with_draws = home_wins / row_size
+        home_win_percentage_without_draws = home_wins / (row_size - draws)
 
-    for i in range(row_size):
-        if df2['home.win'][i]:
-            home_wins += 1
-        elif df2['home.win'][i] is False:
-            away_wins += 1
-        elif df2['home.win'][i] is None:
-            draws += 1
-        else:
-            something_else += 1
-
-    print("Number of all Fixtures: ", row_size)
-    print("Home: ", home_wins)
-    print("Away: ", away_wins)
-    print("Draws: ", draws)
-    # print("Something else: ", something_else)
-
-    home_win_percentage_with_draws = home_wins / row_size
-    home_win_percentage_without_draws = home_wins / (home_wins + away_wins)
-
-    print("Home Advantage with draws: %.2f %%" % (home_win_percentage_with_draws * 100))
-    print("Home Advantage without draws: %.2f %%" % (home_win_percentage_without_draws * 100))
+        print("Home Advantage with draws: %.2f %%" % (home_win_percentage_with_draws * 100))
+        print("Home Advantage without draws: %.2f %%" % (home_win_percentage_without_draws * 100))
