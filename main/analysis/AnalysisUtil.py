@@ -9,7 +9,7 @@ class AnalysisHelper:
     def get_fixtures(self, leagues, years):
         dfs = []
 
-        if (not isinstance(leagues, str)) & (not isinstance(years, str)):
+        if (type(leagues) == list) & (type(years) == list):
             for league in leagues:
                 for year in years:
                     with open(f"../resources/{league}/{league}_{year}.json", "r") as read_file:
