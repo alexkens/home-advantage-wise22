@@ -14,7 +14,10 @@ class AnalysisHelper:
                 for year in years:
                     with open(f"../resources/{league}/{league}_{year}.json", "r") as read_file:
                         data = json.load(read_file)
-                        df = pd.json_normalize(data['response'][0])
+                        try:
+                            df = pd.json_normalize(data['response'][0])
+                        except IndexError:
+                            raise ValueError("THERE IS NO INFORMATION ON GIVEN LEAGUE AND SEASON")
                         for response in data['response'][1:]:
                             df1 = pd.json_normalize(response)
                             df = df.append(df1, ignore_index=True)
@@ -22,7 +25,7 @@ class AnalysisHelper:
 
             return ft.reduce(self.__append, dfs).reset_index()
         else:
-            print("Please pass parameters as lists!")
+            raise ValueError("PLEASE PASS PARAMETERS AS LISTS!")
 
     def number_of_wins_and_percentages(self, league, year):
 
