@@ -2,7 +2,6 @@ import json
 import time
 import requests
 
-
 # ***** Requests API and creates JSON-Files with response. *****
 
 years = list(range(2010, 2020 + 1))
