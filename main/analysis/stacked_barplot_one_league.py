@@ -35,7 +35,7 @@ def f2(result, league_name):
                         "Draws": data_d},
                        index=list(range(2014, 2021)))
 
-    ax = df1.plot(kind='bar', stacked=True, color=['#fb8603', 'red', '#000000'], width=0.9)
+    ax = df1.plot(kind='bar', stacked=True, color=['#fb8603', '#9a8878', '#000000'], width=0.9)
     # ax.figure(figsize=(8, 6))
     plt.xlabel('Seasons')
     plt.ylabel('Fixtures')
@@ -64,7 +64,7 @@ def f2(result, league_name):
 df = pd.read_csv('allFixtures.csv')
 
 # Bundesliga 78, Premier League 39, Serie A 135, Ligue 1 61, La Liga 140, Champions League 2, Europa League 3
-league_id = 3
+league_id = 78
 league_name = df.loc[df['league.id'] == league_id, 'league.name'].values[0]
 f2(f1(df, league_id), league_name)
 
