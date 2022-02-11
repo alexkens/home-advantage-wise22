@@ -3,14 +3,14 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 
-def f1(df, league_id):
-    # create
+def f1(df, league_id, first_season):
+    # filter right columns
     s1 = df.loc[df['league.id'] == league_id, 'teams.home.winner']
     s2 = df.loc[df['league.id'] == league_id, 'league.season']
     s3 = pd.concat([s1, s2], axis=1)
 
     result = []
-    for season in range(2014, 2021):
+    for season in range(first_season, 2021): ################
         s4 = s3.loc[s3['league.season'] == season, 'teams.home.winner']
         hw = s4.value_counts()[True]
         aw = s4.value_counts()[False]
@@ -21,7 +21,7 @@ def f1(df, league_id):
     return result
 
 
-def f2(result, league_name):
+def f2(result, league_name, first_season, number_of_seasons):
     data_h = []
     data_a = []
     data_d = []
@@ -33,15 +33,15 @@ def f2(result, league_name):
     df1 = pd.DataFrame({"Home Wins": data_h,
                         "Away Wins": data_a,
                         "Draws": data_d},
-                       index=list(range(2014, 2021)))
+                       index=list(range(first_season, 2021))) ################
 
-    ax = df1.plot(kind='bar', stacked=True, color=['#fb8603', '#9a8878', '#000000'], width=0.9)
+    ax = df1.plot(kind='bar', stacked=True, color=['#fb8603', '#9a8878', '#000000'], width=0.75)
     # ax.figure(figsize=(8, 6))
     plt.xlabel('Seasons')
-    plt.ylabel('Fixtures')
-    plt.title(f'Home Advantage in {league_name}')
+    plt.ylabel('Matches')
+    plt.title(f'Match Outcome in {league_name}')
 
-    for i in range(0, 7):
+    for i in range(0, number_of_seasons):  ################
         h_per = data_h[i] / (data_h[i] + data_a[i] + data_d[i])
         a_per = data_a[i] / (data_h[i] + data_a[i] + data_d[i])
         d_per = data_d[i] / (data_h[i] + data_a[i] + data_d[i])
@@ -55,7 +55,7 @@ def f2(result, league_name):
         ax.text(i, data_a[i] + data_h[i] - 20, a_per, ha='center', va='center')
         ax.text(i, data_a[i] + data_h[i] + data_d[i] - 20, d_per, ha='center', va='center', color='white')
 
-    ax.figure.savefig(f"../visualization/{league_name}.png")
+    ax.figure.savefig(f"../visualization/single_league_analysis/{league_name}.png")
 
     # plt.show()
 
@@ -66,11 +66,14 @@ df = pd.read_csv('allFixtures.csv')
 # Bundesliga 78, Premier League 39, Serie A 135, Ligue 1 61, La Liga 140, Champions League 2, Europa League 3
 league_id = 78
 league_name = df.loc[df['league.id'] == league_id, 'league.name'].values[0]
-f2(f1(df, league_id), league_name)
+f2(f1(df, league_id, 2010), league_name, 2010, 11)
+
 
 """
 leagues = [78, 39, 135, 61, 140]
+first_season = 2010
+number_of_seasons = 11
 for l in leagues:
     league_name = df.loc[df['league.id'] == l, 'league.name'].values[0]
-    f2(f1(df, l), league_name)
+    f2(f1(df, l, first_season), league_name, first_season, number_of_seasons)
 """
