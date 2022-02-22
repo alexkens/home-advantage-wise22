@@ -54,7 +54,7 @@ def f2(result, league_name, first_season, number_of_seasons):
         ax.text(i, data_h[i] + data_d[i] - 20, d_per, ha='center', va='center')
         ax.text(i, 240, a_per, ha='center', va='center', color='white')
 
-    ax.figure.savefig(f"../visualization/single_league_analysis/{league_name}.png")
+    ax.figure.savefig(f"../visualization/barplot_one_league/{league_name}.png")
 
     # plt.show()
 
