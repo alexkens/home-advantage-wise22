@@ -59,7 +59,6 @@ draws2 = list(pivot2["Draw"])
 wins2 = list(pivot2["Home Win"])
 loss2 = list(pivot2["Away Win"])
 data_frame2 = pd.DataFrame({'Home Win': wins2, 'Draw': draws2, 'Away Win': loss2}, index=list(range(2010, 2021)))
-print(data_frame2)
 
 # Plot 2: "Match outcome for all National Leagues"
 ax = data_frame2.plot(kind='bar', stacked=True, color=['#fb8603', '#9a8878', 'black'], width=0.7)

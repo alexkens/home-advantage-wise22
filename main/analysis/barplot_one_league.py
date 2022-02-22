@@ -4,6 +4,8 @@ sys.path.append('../../')
 import pandas as pd
 import matplotlib.pyplot as plt
 
+from main.analysis.all_enums import LeagueID
+
 
 def f1(df, league_id, first_season):
     # filter right columns
@@ -54,14 +56,13 @@ def f2(result, league_name, first_season, number_of_seasons):
         ax.text(i, data_h[i] + data_d[i] - 20, d_per, ha='center', va='center')
         ax.text(i, 240, a_per, ha='center', va='center', color='white')
 
-    ax.figure.savefig(f"../visualization/barplot_one_league/{league_name}.png")
+    # ax.figure.savefig(f"../visualization/barplot_one_league/{league_name}.png")
 
-    # plt.show()
+    plt.show()
 
 
 if __name__ == "__main__":
     df = pd.read_csv('allFixtures.csv')
 
-    league_id = 78
-    league_name = df.loc[df['league.id'] == league_id, 'league.name'].values[0]
-    f2(f1(df, league_id, 2010), league_name, 2010, 11)
+    league_name = df.loc[df['league.id'] == LeagueID.BUNDESLIGA_ID, 'league.name'].values[0]
+    f2(f1(df, LeagueID.BUNDESLIGA_ID, 2010), league_name, 2010, 11)

@@ -1,14 +1,14 @@
-import pandas as pd
 import matplotlib.pyplot as plt
-import all_enums as ae
+import pandas as pd
+from all_enums import LeagueID
 
 df = pd.read_csv('allFixtures.csv')
-leagues = [ae.LeagueID.BUNDESLIGA_ID.real,
-           ae.LeagueID.PREMIER_LEAGUE_ID.real,
-           ae.LeagueID.LA_LIGA_ID.real,
-           ae.LeagueID.LIGUE_1_ID.real,
-           ae.LeagueID.SERIE_A_ID.real
-]
+leagues = [LeagueID.BUNDESLIGA_ID,
+           LeagueID.PREMIER_LEAGUE_ID,
+           LeagueID.LA_LIGA_ID,
+           LeagueID.LIGUE_1_ID,
+           LeagueID.SERIE_A_ID
+           ]
 
 df1 = df.loc[df['league.id'] == leagues[0]]
 df2 = df.loc[df['league.id'] == leagues[1]]
@@ -16,10 +16,7 @@ df3 = df.loc[df['league.id'] == leagues[2]]
 df4 = df.loc[df['league.id'] == leagues[3]]
 df5 = df.loc[df['league.id'] == leagues[4]]
 
-df6 = df1.append(df2)
-df6 = df6.append(df3)
-df6 = df6.append(df4)
-df6 = df6.append(df5)
+df6 = pd.concat([df1, df2, df3, df4, df5])
 
 # extract needed columns
 s1 = df6.loc[:, 'teams.home.winner']
@@ -35,7 +32,6 @@ for season in range(2010, 2021):
     d = s4.size - hw - aw
     result.append([hw, aw, d])
     # print([hw, aw, d])
-
 
 data_h = []
 data_a = []
@@ -59,5 +55,5 @@ plt.title(f'Match outcome for all National Leagues')
 # plt.text(x=2015, y=700, s=str(56))
 
 plt.legend(['Home Win', 'Away Win', 'Draws'])
-plt.savefig(f"../visualization/all_leagues_graphline/all_leagues_graphline.png")
-# plt.show()
+# plt.savefig(f"../visualization/all_leagues_graphline/all_leagues_graphline.png")
+plt.show()
