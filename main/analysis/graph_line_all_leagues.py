@@ -59,5 +59,5 @@ plt.title(f'Match outcome for all National Leagues')
 # plt.text(x=2015, y=700, s=str(56))
 
 plt.legend(['Home Win', 'Away Win', 'Draws'])
-plt.savefig(f"all_leagues_graphline.png")
+plt.savefig(f"../visualization/all_leagues_graphline/all_leagues_graphline.png")
 # plt.show()
