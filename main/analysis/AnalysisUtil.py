@@ -29,7 +29,7 @@ class AnalysisHelper:
 
     @staticmethod
     def place_logos_teams(df, ax):
-        for i, j in enumerate(df['teams.name'].tolist()):
+        for i, j in enumerate(df['teams.id'].tolist()):
             img = AnalysisHelper.__get_logo_from_team(j)
             im = OffsetImage(img, zoom=0.1)
             im.image.axes = ax
@@ -41,7 +41,7 @@ class AnalysisHelper:
 
     @staticmethod
     def place_logos_leagues(df, ax):
-        for i, j in enumerate(df['teams.name'].tolist()):
+        for i, j in enumerate(df['league.id'].tolist()):
             img = AnalysisHelper.__get_logo_from_league(j)
             im = OffsetImage(img, zoom=0.1)
             im.image.axes = ax
