@@ -80,4 +80,5 @@ In order for you to run our project with PyCharm you have to follow the steps be
 
 # Sources
 
-All our data is from [api-football.com](api-football.com). 
+All our data is from [api-football.com](api-football.com).  
+If you like to recreate the requests, go ahead and register for the API to get your own rapidapi-key. After that, you need to insert the key in the request headers and run the script as explained in the section above.
