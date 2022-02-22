@@ -77,3 +77,7 @@ In order for you to run our project with PyCharm you have to follow the steps be
     - opening the script, 
     - right clicking on the code and 
     - pressing on Run 'python_script.py'
+
+# Sources
+
+All our data is from [api-football.com](api-football.com). 
